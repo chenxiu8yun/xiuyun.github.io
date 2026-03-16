@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>靜心瑜伽館 - 找到内心的平静</title>
+    <style>
+        /* 全局样式重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Microsoft YaHei', sans-serif;
+        }
+
+        /* 变量定义 - 瑜伽主题配色 */
+        :root {
+            --primary-color: #88c094; /* 主色调：柔和的绿色 */
+            --secondary-color: #e8e4d8; /* 辅助色：米色 */
+            --accent-color: #d68f79; /* 强调色：暖橙色 */
+            --text-color: #333333; /* 文字主色 */
+            --light-text: #666666; /* 次要文字色 */
+            --white: #ffffff; /* 白色 */
+            --shadow: 0 4px 8px rgba(0,0,0,0.1); /* 阴影效果 */
+        }
+
+        /* 基础样式 */
+        body {
+            color: var(--text-color);
+            line-height: 1.6;
+            background-color: var(--secondary-color);
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--text-color);
+            transition: all 0.3s ease;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: var(--primary-color);
+            color: var(--white);
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #75b080;
+            transform: translateY(-2px);
+        }
+
+        .btn-accent {
+            background-color: var(--accent-color);
+        }
+
+        .btn-accent:hover {
+            background-color: #c87e69;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 32px;
+            margin-bottom: 60px;
+            color: var(--primary-color);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            width: 80px;
+            height: 3px;
+            background-color: var(--accent-color);
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* 导航栏样式 */
+        header {
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* 英雄区样式 */
+        .hero {
+            height: 90vh;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1518310952118-94f9b9e8c971?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            color: var(--white);
+            text-align: center;
+        }
+
+        .hero-content {
+            width: 100%;
+        }
+
+        .hero h1 {
+            font-size: 50px;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* 课程板块样式 */
+        .classes {
+            background-color: var(--white);
+        }
+
+        .classes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .class-card {
+            background-color: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .class-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .class-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .class-content {
+            padding: 25px;
+        }
+
+        .class-content h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .class-content p {
+            color: var(--light-text);
+            margin-bottom: 20px;
+        }
+
+        .class-price {
+            font-weight: bold;
+            color: var(--accent-color);
+            font-size: 18px;
+        }
+
+        /* 师资板块样式 */
+        .teachers {
+            background-color: var(--secondary-color);
+        }
+
+        .teachers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .teacher-card {
+            text-align: center;
+        }
+
+        .teacher-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+            border: 5px solid var(--white);
+        }
+
+        .teacher-card h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .teacher-card p {
+            color: var(--light-text);
+        }
+
+        /* 关于我们样式 */
+        .about {
+            background-color: var(--white);
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .about-img {
+            flex: 1;
+        }
+
+        .about-img img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+        }
+
+        .about-content {
+            flex: 1;
+        }
+
+        .about-content h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        .about-content p {
+            margin-bottom: 20px;
+            color: var(--light-text);
+        }
+
+        /* 联系我们样式 */
+        .contact {
+            background-color: var(--secondary-color);
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .contact-item i {
+            font-size: 24px;
+            color: var(--primary-color);
+        }
+
+        .contact-form {
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .form-group textarea {
+            height: 150px;
+            resize: none;
+        }
+
+        /* 页脚样式 */
+        footer {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            margin-bottom: 20px;
+        }
+
+        .footer-content p {
+            margin-top: 15px;
+        }
+
+        .copyright {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero p {
+                font-size: 18px;
+            }
+
+            .about {
+                flex-direction: column;
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+
+            section {
+                padding: 60px 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 28px;
+            }
+
+            .section-title {
+                font-size: 26px;
+            }
+        }
+    </style>
+    <!-- 引入字体图标 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">静心瑜伽</div>
+                <ul class="nav-links">
+                    <li><a href="#home">首页</a></li>
+                    <li><a href="#classes">课程</a></li>
+                    <li><a href="#teachers">师资</a></li>
+                    <li><a href="#about">关于我们</a></li>
+                    <li><a href="#contact">联系我们</a></li>
+                </ul>
+                <div class="mobile-menu">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 英雄区 -->
+    <section class="hero" id="home">
+        <div class="container hero-content">
+            <h1>找到内心的平靜，遇見更好的自己</h1>
+            <p>靜心瑜伽館，專業的瑜伽教學，舒適的練習環境，讓您在繁忙的生活中找到片刻的寧靜</p>
+            <a href="#contact" class="btn btn-accent">立即预约体验</a>
+        </div>
+    </section>
+
+    <!-- 课程板块 -->
+    <section class="classes" id="classes">
+        <div class="container">
+            <h2 class="section-title">我们的课程</h2>
+            <div class="classes-grid">
+                <!-- 课程1 -->
+                <div class="class-card">
+                    <img src="https://images.unsplash.com/photo-1519999482648-25049ddd37b1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="哈他瑜伽" class="class-img">
+                    <div class="class-content">
+                        <h3>哈他瑜伽</h3>
+                        <p>基礎入門瑜伽，注重身體姿勢與呼吸的配合，適合初學者，幫助建立良好的瑜伽基礎。。</p>
+                        <p class="class-price">288/节</p>
+                        <a href="#contact" class="btn" style="margin-top: 15px;">預約課程</a>
+                    </div>
+                </div>
+                <!-- 课程2 -->
+                <div class="class-card">
+                    <img src="https://images.unsplash.com/photo-1581123347417-965795658111?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="流瑜伽" class="class-img">
+                    <div class="class-content">
+                        <h3>流瑜伽</h3>
+                        <p>動態瑜伽練習，將一系列的體式流暢地連接起來，配合呼吸，提升身體的柔韌性和力量。</p>
+                        <p class="class-price">358/节</p>
+                        <a href="#contact" class="btn" style="margin-top: 15px;">预约课程</a>
+                    </div>
+                </div>
+                <!-- 课程3 -->
+                <div class="class-card">
+                    <img src="https://images.unsplash.com/photo-1592091817098-9fe799c5b185?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="阴瑜伽" class="class-img">
+                    <div class="class-content">
+                        <h3>阴瑜伽</h3>
+                        <p>慢節奏的瑜伽練習，每個體式保持較長時間，深入拉伸身體的結締組織，釋放壓力。</p>
+                        <p class="class-price">438/节</p>
+                        <a href="#contact" class="btn" style="margin-top: 15px;">预约课程</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 师资板块 -->
+    <section class="teachers" id="teachers">
+        <div class="container">
+            <h2 class="section-title">专业师资</h2>
+            <div class="teachers-grid">
+                <!-- 老師 -->
+                <div class="teacher-card">
+                    <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="李老师" class="teacher-img">
+                    <h3>李靜</h3>
+                    <p>10年瑜伽教學經驗</p>
+                    <p>國際瑜伽聯盟認證導師</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 关于我们 -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-img">
+                <img src="https://images.unsplash.com/photo-1520209122533-65c62a78b6d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="瑜伽馆环境">
+            </div>
+            <div class="about-content">
+                <h3>關於靜心瑜伽館</h3>
+                <p>靜心瑜伽館成立於2025年，位於花蓮市市中心繁華地段，擁有100坪的寬敞練習空間，配備專業的瑜伽設備和舒適的休息區。</p>
+                <p>我們的教學理念是“身心合一，回歸本真”，致力於為每一位營員提供專業、貼心的瑜伽教學服務，幫助營員在瑜伽練習中找到內心的平靜，改善身體狀態，提升生活品質。</p>
+                <p>館內定期舉辦瑜伽沙龍、戶外瑜伽等特色活動，為營員打造一個交流、分享、共同成長的瑜伽社群。</p>
+                <a href="#contact" class="btn">了解更多</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系我们 -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2 class="section-title">联系我们</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h3>馆址</h3>
+                            <p>花蓮瀚品飯店7樓23號</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h3>电话</h3>
+                            <p>請聯繫line：xy060679</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h3>邮箱</h3>
+                            <p>sammyyazuhznjhmg@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <h3>营业时间</h3>
+                            <p>週一至週五: 8:00 - 21:00</p>
+                            <p>週六至週日: 9:00 - 20:00</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form>
+                        <div class="form-group">
+                            <label for="name">您的姓名</label>
+                            <input type="text" id="name" placeholder="请输入您的姓名" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">联系电话</label>
+                            <input type="tel" id="phone" placeholder="请输入您的联系电话" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="course">感兴趣的课程</label>
+                            <input type="text" id="course" placeholder="例如：哈他瑜伽">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">留言</label>
+                            <textarea id="message" placeholder="请输入您的留言或咨询内容"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-accent">提交预约</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="logo" style="color: white; font-size: 28px; margin-bottom: 10px;">静心瑜伽</div>
+                <p>地址：花蓮瀚品飯店7樓23號 | 电话：請聯繫line：xy060679</p>
+                <p>© 2025 静心瑜伽馆 版权所有</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 简单的移动端菜单切换（基础功能）
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const navLinks = document.querySelector('.nav-links');
+
+        mobileMenu.addEventListener('click', () => {
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+            navLinks.style.flexDirection = 'column';
+            navLinks.style.position = 'absolute';
+            navLinks.style.top = '70px';
+            navLinks.style.right = '20px';
+            navLinks.style.backgroundColor = 'white';
+            navLinks.style.padding = '20px';
+            navLinks.style.borderRadius = '8px';
+            navLinks.style.boxShadow = '0 4px 8px rgba(0,0,0,0.1)';
+        });
+
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // 表单提交提示
+        const contactForm = document.querySelector('.contact-form form');
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('预约信息提交成功！我们将尽快与您联系。');
+            this.reset();
+        });
+    </script>
+</body>
+</html>
